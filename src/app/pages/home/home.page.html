@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/calculadora']">
+        <ion-icon slot="icon-only" name="calculator"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Home
     </ion-title>
@@ -13,7 +18,6 @@
         <img src="assets/imgs/perfil.jpeg" alt="Foto de Perfil">
         <h3>{{ nome }}</h3>
         <p>Matrícula: {{ matricula }}</p>
-        <ion-button [routerLink]="['/calculadora']">Calculadora</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

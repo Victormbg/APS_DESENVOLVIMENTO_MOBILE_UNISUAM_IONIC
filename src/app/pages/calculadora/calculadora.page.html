@@ -6,6 +6,11 @@
     <ion-title>
       Calculadora Binária
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/historico']">
+        <ion-icon slot="icon-only" name="time"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -22,9 +27,6 @@
       <ion-item>
         <ion-label>Resultado:</ion-label>
         <ion-input [(ngModel)]="result" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-button expand="block" class="ion-margin-top" [routerLink]="['/historico']">Ir para Histórico</ion-button>
       </ion-item>
     </ion-card-content>
   </ion-card>
