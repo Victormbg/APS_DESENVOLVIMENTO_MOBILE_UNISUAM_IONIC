@@ -1,11 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+  <ion-title>
+  Calculadora Binária
+  </ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-
-</ion-content>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true">
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input [(ngModel)]="binaryInput" placeholder="Insira um número binário"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="convertToDecimal()">Converter para Decimal<ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" (click)="clearInput()">Limpar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h3>Decimal:</h3>
+        </ion-col>
+        <ion-col>
+          <h3>{{ decimalValue }}</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content> 

@@ -7,4 +7,4 @@ ports:
 tasks:
   - before: npm install -g @ionic/cli
     init: npm install
-    command: ionic serve -- --disableHostCheck
+    command: ionic serve --host=localhost --port=8100 --disableHostCheck

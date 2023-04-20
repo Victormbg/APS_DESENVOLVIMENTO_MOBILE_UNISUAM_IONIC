@@ -10,5 +10,17 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
   imports: [IonicModule, ExploreContainerComponent],
 })
 export class Tab1Page {
-  constructor() {}
+  constructor() { }
+
+  binaryInput: string = '';
+  decimalValue: number = 0;
+
+  convertToDecimal() {
+    this.decimalValue = parseInt(this.binaryInput, 2);
+  }
+
+  clearInput() {
+    this.binaryInput = '';
+    this.decimalValue = 0;
+  }
 }
