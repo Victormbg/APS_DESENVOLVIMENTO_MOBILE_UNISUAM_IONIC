@@ -1,30 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { HistoricoService } from '../../services/historico.service';
 
 @Component({
   selector: 'app-historico',
   templateUrl: './historico.page.html',
   styleUrls: ['./historico.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule],
 })
+
 export class HistoricoPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   operacoes: string[] = [];
 
-  adicionarOperacao(operacao: string) {
-    console.log(operacao)
-    this.operacoes.push(operacao);
+  constructor(private historicoService: HistoricoService) { }
+
+  ngOnInit() {
+    this.operacoes = this.historicoService.operacoes;
   }
 
   limparOperacoes() {
+    this.historicoService.limparOperacoes();
     this.operacoes = [];
   }
 

@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { CalculadoraService } from '../../services/calculadora.service';
+import { HistoricoService } from 'src/app/services/historico.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { HistoricoPage } from '../historico/historico.page';
 import { RouterModule } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-
 @Component({
   selector: 'app-calculadora',
   templateUrl: './calculadora.page.html',
@@ -14,46 +13,32 @@ import { AlertController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 
-export class CalculadoraPage implements OnInit, AfterViewInit {
+export class CalculadoraPage implements OnInit {
 
-  @ViewChild(HistoricoPage) historico!: HistoricoPage;
+  binary1 = ''; // Variável para armazenar o primeiro número binário
+  binary2 = ''; // Variável para armazenar o segundo número binário
+  result = ''; // Variável para armazenar o resultado da soma
 
-  binary1 = '';
-  binary2 = '';
-  result = '';
+  constructor(public alertController: AlertController, private calculadoraService: CalculadoraService, private historicoService: HistoricoService) { }
 
-  constructor(public alertController: AlertController) { }
-
-  ngOnInit() { }
-
-  ngAfterViewInit() {
-    console.log('historico:', this.historico);
+  ngOnInit() {
+    // Método executado quando a página é carregada
   }
 
-  isBinary(val: string) {
-    return val.split('').filter(x => x == "0" || x == "1").length == val.length;
-  }
-
-  async sum() {
-
-    if (this.isBinary(this.binary1) && this.isBinary(this.binary2)) {
-
-      const decimal1 = parseInt(this.binary1, 2);
-      const decimal2 = parseInt(this.binary2, 2);
-      const decimalSum = decimal1 + decimal2;
-      this.result = decimalSum.toString(2);
-
-      const operacao = `${this.binary1} + ${this.binary2} = ${this.result}`;
-      console.log(operacao);
-
-      this.historico.adicionarOperacao(operacao);
-    } else {
+  async somar() {
+    try {
+      // Tenta realizar a soma usando o serviço de calculadora
+      // O resultado é armazenado na variável 'result'
+      this.result = await this.calculadoraService.somar(this.binary1, this.binary2, this.historicoService);
+    } catch (error: any) {
+      // Se houver um erro, exibe uma mensagem de alerta
       const alert = await this.alertController.create({
         header: 'Erro',
-        message: 'Os números devem ser binários (0 ou 1)',
+        message: error.message,
         buttons: ['OK']
       });
       await alert.present();
     }
   }
+
 }
